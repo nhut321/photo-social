@@ -1,0 +1,22 @@
+.chat-input {
+    display: flex;
+    align-items: center;
+}
+
+.chat-input input {
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid var(--grey-color);
+    border-radius: 8px;
+    flex: 1;
+}
+
+.chat-input input:focus {
+    outline: none;
+}
+
+.chat-input__emoji {
+    font-size: 20px;
+    margin-right: 10px;
+    cursor: pointer;
+}

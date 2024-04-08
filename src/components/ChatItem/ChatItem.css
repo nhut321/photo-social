@@ -1,0 +1,32 @@
+.chat-item {
+    display: flex;
+    align-items: center;
+    margin: 20px;
+}
+
+.chat-item.me {
+    flex-direction: row-reverse;
+}
+
+.chat-item__avatar {
+    width: 60px;
+    height: 60px;
+    margin-right: 8px;
+}
+
+.chat-item.me .chat-item__avatar {
+    margin-left: 8px;
+}
+
+.chat-item__avatar img {
+    width: 100%;
+    border-radius: 50%;
+}
+
+.chat-item__chat-content {
+    max-width: 50%;
+    font-size: 0.8rem;
+    padding: 10px;
+    border: 1px solid var(--grey-color);
+    border-radius: 8px;
+}

@@ -1,0 +1,23 @@
+.feed {
+    /* margin-left: 115px; */
+}
+
+.feed-wrap {
+    display: flex;
+    margin: 0 0 0 30px;
+}
+
+.feed-left {
+    width: 70%;
+    margin-right: 20px;
+}
+
+.feed-left>h2 {
+    padding: 20px;
+}
+
+.feed-right {
+    width: 30%;
+    background-color: var(--white-color);
+    padding: 0 20px;
+}

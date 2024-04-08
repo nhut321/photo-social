@@ -1,0 +1,17 @@
+.bookmark-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 10px 0;
+}
+
+.bookmark-content {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.bookmark-content img {
+    width: 50%;
+    border-radius: 10px;
+    padding: 5px;
+}

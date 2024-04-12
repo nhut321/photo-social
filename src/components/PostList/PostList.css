@@ -1,4 +1,4 @@
 .post-list {
-    display: flex;
-    flex-wrap: wrap;
+    column-count: 3;
+  column-gap: 1em;
 }

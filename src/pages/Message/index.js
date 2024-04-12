@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import './Message.css'
 import ChatList from '../../components/ChatList'
 import ChatInput from '../../components/ChatInput'
+import Sidebar from '../../components/Sidebar'
 
 export default function Message() {
   const [chatActive, setChatActive] = useState(0)
@@ -9,6 +10,8 @@ export default function Message() {
     setChatActive(v)
   }
   return (
+    <>
+    <Sidebar />
     <div className="message">
       <div className="message-left">
         <div className="message-left__header">
@@ -65,5 +68,6 @@ export default function Message() {
         }
       </div>
     </div>
+    </>
   )
 }

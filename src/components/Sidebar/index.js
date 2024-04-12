@@ -1,18 +1,22 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import "./Sidebar.css";
+import { authContext } from "../../context/AuthContext";
 
 export default function Sidebar() {
+  const Auth = useContext(authContext)
   const localActive = JSON.parse(localStorage.getItem('active tab') || 1)
+  const user = JSON.parse(localStorage.getItem('user') || '../../assets/img/profile-2.png')
   const [active, setActive] = useState(localActive);
   const selectFn = (v) => {
     setActive(v);
     JSON.stringify(localStorage.setItem('active tab', v))
   };
+
   return (
     <div className="sidebar">
       <div className="sidebar-logo">
-        <img src={require("../../assets/img/logo.png")} alt="" />
+        <img src={user.avatar || require('../../assets/img/profile-2.png')} alt="" />
       </div>
       <div className="sidebar-list">
         <div

@@ -1,23 +1,75 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./LoginRegister.css";
 import "mdb-react-ui-kit/dist/css/mdb.min.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import axios from 'axios'
+import { baseURL } from "../../baseURL";
+import { useNavigate } from 'react-router-dom'
+import { authContext } from "../../context/AuthContext";
 
 export default function LoginRegister() {
-  const [activeTab, setActiveTab] = useState(false);
+  const Auth = useContext(authContext)
+  const [activeTab, setActiveTab] = useState();
   const [loginInput, setLoginInput] = useState({email: '', password: ''})
   const [regInput, setRegInput] = useState({name: '', email: '', password: ''})
+  const [checkLoginInput, setCheckLoginInput] = useState({
+    status: true,
+    message: ''
+  })
+  const testUser = {
+    email: "nhut",
+    age: 18
+  }
+  // localStorage.setItem('user1', (JSON.stringify(testUser)))
   const switchTab = () => {
     setActiveTab((v) => !v);
   };
+  const navigate = useNavigate()
 
   const LoginFn = (e) => {
     e.preventDefault()
+    const fetchData = async () => {
+      try {
+        await axios.post(baseURL + '/user/login', {
+          
+            email: loginInput.email,
+            password: loginInput.password
+          
+        })
+          .then(data => {
+            console.log(data.data.user)
+            if (data.data.success) {
+              const userToken = localStorage.setItem('token', `${data.data.token}`)
+              localStorage.setItem('user', (JSON.stringify(data.data.user)))
+              navigate('/')
+              setCheckLoginInput(v => {
+                return {...v, status: true, message: ''}
+              })
+              Auth.setUser(data.data.user)
+              return userToken
+            } else if(data.data.success === false) {
+              setCheckLoginInput(v => {
+                return {...v, status: false, message: data.data.message}
+              })
+            } else {
+              setCheckLoginInput(v => {
+                return {...v, status: false, message: data.data}
+              })
+            }
+          })
+      } catch(err) {
+
+      }
+    }
+    fetchData()
   }
   const RegFn = (e) => {
     e.preventDefault()
   }
   const onChangeLoginInput = (e) => {
+    setCheckLoginInput(v => {
+      return {...v, status: true, message: ''}
+    })
     setLoginInput(v => {
       return {...v, [e.target.name]: e.target.value}
     })
@@ -27,6 +79,7 @@ export default function LoginRegister() {
       return {...v, [e.target.name]: e.target.value}
     })
   }
+
   return (
     <div className="login-wrapper">
       <div
@@ -87,6 +140,16 @@ export default function LoginRegister() {
             <div className="header-text mb-4">
               <h1>Login</h1>
             </div>
+            {
+              checkLoginInput.status
+              ?
+              <></>
+              :
+              <p style={{
+                fontSize: '12px',
+                color: 'red'
+              }}>{checkLoginInput.message}</p>
+            }
             <div className="input-group mb-3">
               <input
                 name="email"
@@ -124,7 +187,7 @@ export default function LoginRegister() {
               </div>
             </div>
             <div className="input-group mb-3 justify-content-center">
-              <button type="submit" className="border-white text-white w-50 fs-6" onClick={() => LoginFn()}>
+              <button type="submit" className="border-white text-white w-50 fs-6">
                 Login
               </button>
             </div>

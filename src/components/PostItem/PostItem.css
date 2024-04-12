@@ -1,5 +1,5 @@
 .post-item {
-    width: 50%;
+    /* width: 50%; */
     padding: 10px;
 }
 
@@ -26,12 +26,14 @@
 
 .post-item__info-user .info-user__img {
     width: 40px;
+    height: 40px;
     margin-right: 5px;
 }
 
 .post-item__info-user .info-user__img img {
     width: 100%;
     border-radius: 50%;
+    height: 100%;
 }
 
 .post-item__info-reaction {
@@ -48,7 +50,7 @@
 .info-reaction__heart>i,
 .info-reaction__comment>i {
     position: relative;
-    top: 1px;
+    top: -1px;
     margin-right: 5px;
     font-size: 1.1rem;
 }
